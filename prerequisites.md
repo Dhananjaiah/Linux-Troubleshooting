@@ -128,7 +128,7 @@ If any of these are unfamiliar, review basic Linux tutorials before starting.
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/Linux-Troubleshooting.git
+git clone https://github.com/Dhananjaiah/Linux-Troubleshooting.git
 cd Linux-Troubleshooting
 ```
 

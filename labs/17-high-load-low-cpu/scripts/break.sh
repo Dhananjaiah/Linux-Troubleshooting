@@ -31,9 +31,9 @@ print_status "Creating I/O-bound processes..."
 for i in {1..4}; do
     (
         while [[ -f "$MARKER_FILE" ]]; do
-            dd if=/dev/zero of=/tmp/io-load-$i bs=1M count=50 conv=fdatasync 2>/dev/null
+            dd if=/dev/zero of=/tmp/io-load-$i bs=1M count=10 conv=fdatasync 2>/dev/null
             sync
-            sleep 0.1
+            sleep 1
         done
     ) &
 done

@@ -6,12 +6,15 @@ if [[ $EUID -ne 0 ]]; then echo "Run with sudo"; exit 1; fi
 
 echo "[BREAK] Creating unresponsive system simulation..."
 
-# Start multiple CPU-hungry processes
+# Start multiple CPU-hungry processes and track their PIDs
+PIDS=""
 for i in {1..4}; do
     (while true; do :; done) &
+    PIDS="$PIDS $!"
 done
 
-echo $! > "$MARKER_FILE"
+# Store all PIDs for reliable cleanup
+echo "$PIDS" > "$MARKER_FILE"
 
 echo ""
 echo "System is now under heavy load!"

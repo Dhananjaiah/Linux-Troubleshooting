@@ -39,10 +39,10 @@ echo "$CURRENT_MAX" > /tmp/.mysql_max_connections_backup
 print_status "Setting max_connections to 10..."
 mysql -u root -e "SET GLOBAL max_connections = 10;" 2>/dev/null
 
-# Create dummy connections
+# Create dummy connections with shorter timeout (5 minutes max)
 print_status "Creating connections to exhaust the pool..."
 for i in {1..15}; do
-    mysql -u root -e "SELECT SLEEP(3600);" &>/dev/null &
+    mysql -u root -e "SELECT SLEEP(300);" &>/dev/null &
 done
 
 echo "$!" > "$MARKER_FILE"

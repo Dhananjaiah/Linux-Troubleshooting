@@ -64,7 +64,11 @@ if id "$TEST_USER" &>/dev/null; then
     pkill -u "$TEST_USER" 2>/dev/null || true
     
     # Remove the user and their home directory
-    userdel -r "$TEST_USER" 2>/dev/null || userdel "$TEST_USER" 2>/dev/null || true
+    if ! userdel -r "$TEST_USER" 2>/dev/null; then
+        # If home directory removal fails, try removing user only
+        print_status "Note: Home directory removal may have failed, removing user only..."
+        userdel "$TEST_USER" 2>/dev/null || true
+    fi
 else
     print_status "Test user '$TEST_USER' does not exist"
 fi
